@@ -1,7 +1,0 @@
-.frame-type-mask_album {
-  overflow: hidden;
-  @include grid(12,12);
-  @media #{$sm} {
-    @include grid(6,6,6,6);
-  }
-}
