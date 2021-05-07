@@ -1,0 +1,49 @@
+.frame-type-mask_cookiebanner {
+  display: none;
+  text-align: center;
+  min-height: 33px;
+  background: rgba(80, 80, 80, 0.7);
+  padding: 15px 10px 4px 10px;
+  color: white;
+  position: fixed;
+  z-index: 10000;
+  margin: 0;
+  right: 0;
+  width: 320px;
+  bottom: 0;
+  font-size: 15px;
+  box-sizing: border-box;
+  p {
+    margin: 0;
+    line-height: 1.2em;
+    opacity: 1;
+    color: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    a {
+      color: inherit;
+      text-decoration: underline;
+    }
+  }
+  button {
+    margin: 6px 5px;
+    font-family: inherit;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 13px 12px 12px 12px;
+    line-height: 1em;
+    text-decoration: none;
+    text-transform: uppercase;
+    background: white;
+    box-sizing: border-box;
+    color: black;
+    border: black solid 1px;
+    outline: none;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+  }
+}

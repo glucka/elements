@@ -1,0 +1,33 @@
+.burger {
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  width: px-to-rem(37);
+  height: px-to-rem(37);
+  position: relative;
+
+  > img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 400ms;
+
+    &:first-child{
+      width: px-to-rem(35);
+    }
+    &:last-child {
+      width: px-to-rem(37);
+      transform: translate(-50%, -50%) scale(0);
+    }
+
+    @at-root body.visible-menu &:first-child {
+      transform: translate(-50%, -50%) scale(0);
+    }
+    @at-root body.visible-menu &:last-child {
+      transform: translate(-50%, -50%) scale(1);
+
+    }
+  }
+
+}

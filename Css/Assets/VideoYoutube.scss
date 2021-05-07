@@ -1,0 +1,47 @@
+.frame-type-mask_videoyoutube {
+  position: relative;
+
+  > div {
+    height: 0;
+    padding-bottom: 56.25%;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+
+    > div {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-position: center center;
+      background-size: cover;
+
+      > button {
+        cursor: pointer;
+        width: 115px;
+        background: transparent;
+        border: none;
+        position: absolute;
+        outline: none;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 0;
+
+        .hover {
+          transition: all 400ms;
+          fill: gray;
+        }
+
+        &:hover .hover {
+          fill: $c-hover;
+        }
+      }
+    }
+
+    > iframe {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

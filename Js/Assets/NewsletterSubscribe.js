@@ -1,0 +1,1 @@
+setValidate('newsletter-subscribe');

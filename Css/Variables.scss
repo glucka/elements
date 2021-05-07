@@ -1,0 +1,517 @@
+$base-font-size: 16;
+$base-layout-size: 1280;
+
+@function strip-units($val) {
+  @return $val / ($val * 0 + 1);
+}
+
+/*@function px-to-em($px, $base-px: $base-font-size) {
+  @return strip-units($px) / $base-px * 1em;
+}*/
+
+@function px-to-rem($px, $base-px: $base-font-size) {
+  @return strip-units($px) / $base-px * 1rem;
+}
+
+@function px-to-vw($px, $base-layout: $base-layout-size) {
+  @return strip-units($px) / $base-layout-size * 100vw;
+}
+
+@function pt-to-px($pt) {
+  @return strip-units($pt) * 1.333px;
+}
+
+@function pt-to-vw($pt, $base-layout: $base-layout-size) {
+  @return strip-units($pt) * 1.333 / $base-layout-size * 100vw;
+}
+
+@function gr-width-custom($cols, $gutter, $width) {
+  @return calc((100% + #{$gutter}) / #{$cols} * #{$width} - #{$gutter})
+}
+
+@function gr-width($width) {
+  @return gr-width-custom($cols, $gutter, $width);
+}
+
+@function gr-width-brutto-custom($cols, $gutter, $width) {
+  @return calc((100% + #{$gutter}) / #{$cols} * #{$width})
+}
+
+@function gr-width-brutto($width) {
+  @return gr-width-brutto-custom($cols, $gutter, $width);
+}
+
+$portrait: '(orientation: portrait)';
+$landscape: '(orientation: landscape)';
+
+$xs: '(min-width: 480px)';
+$sm: '(min-width: 768px)';
+$smd: '(min-width: 980px)';
+$md: '(min-width: 1280px)';
+$lg: '(min-width: 1900px)';
+
+$cols: 24;
+$gutter: 1.5621vw;
+
+$cont-padding-y: 7vw;
+$cont-padding-y-sm: 6vw;
+$cont-padding-y-md: 7.8vw;
+$cont-padding-y-lg: 6vw;
+
+$frame-margin-y: 7vw;
+$frame-margin-y-sm: 6vw;
+$frame-margin-y-md: 7.8vw;
+$frame-margin-y-lg: 6vw;
+
+$field-margin-y: $gutter;
+
+$headerHeight: 70px;
+$headerHeightSm: px-to-rem(80);
+
+$headerBannerHeight: 40px;
+$headerBannerHeightSm: px-to-rem(40);
+
+$c-gray1: #595656;
+$c-gray2: #dedede;
+$c-gray-footer: #5d6367;
+
+$c-yellow-trans: rgba(255, 196, 3, 0.5);
+$c-blue: #30368b;
+
+$c-html: white;
+$c-body: white;
+$c-default: #333B33;
+$c-alert: red;
+$c-hover: green;
+$c-hover-light: green;
+$c-grid: #f1d9f5;
+$c-alert-trans: $c-yellow-trans;
+
+
+@keyframes scrollDown {
+  0% {
+    transform: translate(-50%, 0) rotate(-45deg);
+  }
+  20% {
+    transform: translate(-50%, -15px) rotate(-45deg);
+  }
+  40% {
+    transform: translate(-50%, 0) rotate(-45deg);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+@mixin gradient {
+  background-image: linear-gradient(45deg, #ddabbe, #547fce);
+}
+
+@mixin underline($position: 1.1em, $color: $c-default) {
+  background-image: linear-gradient(to right, $color, $color);
+  background-position: 0 $position;
+  background-repeat: repeat-x;
+  background-size: 1px 1px;
+}
+
+@mixin gr-custom($cols, $gutter, $width, $offset:0) {
+  width: gr-width-custom($cols, $gutter, $width);
+
+  @if $offset != 0 {
+    margin-left: #{gr-width-brutto-custom($cols, $gutter, $offset)};
+  }
+}
+
+@mixin gr($width, $offset:0) {
+  @include gr-custom($cols, $gutter, $width, $offset);
+}
+
+@mixin grid-custom($cols, $gutter, $widths...) {
+  display: flex;
+  flex: 0 1 auto;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+
+  @for $i from 1 through length($widths) {
+    $width: nth($widths, $i);
+    $elementsInRow: length($widths);
+
+    > *:nth-child(#{$i}n) {
+      @include gr-custom($cols, $gutter, $width);
+      margin-right: #{$gutter};
+      @at-root body.firefox & {
+        margin-right: #{$gutter};
+      }
+    }
+    > *:nth-child(#{$elementsInRow}n) {
+      margin-right: 0;
+      @at-root body.firefox & {
+        margin-right: -.5px;
+      }
+    }
+    > *:last-child {
+      margin-right: 0;
+      @at-root body.firefox & {
+        margin-right: -.5px;
+      }
+    }
+  }
+
+}
+
+@mixin grid($widths...) {
+  @include grid-custom($cols, $gutter, $widths...)
+}
+
+
+@mixin placeholder {
+  color: $c-default;
+  text-transform: uppercase;
+}
+
+
+@mixin clearfix {
+  &:before {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin frame-margin-top {
+  margin-top: $frame-margin-y;
+  @media #{$sm} {
+    margin-top: $frame-margin-y-sm;
+  }
+  @media #{$md} {
+    margin-top: $frame-margin-y-md;
+  }
+  @media #{$lg} {
+    margin-top: $frame-margin-y-lg;
+  }
+}
+
+@mixin frame-margin-bottom {
+  margin-bottom: $frame-margin-y;
+  @media #{$sm} {
+    margin-bottom: $frame-margin-y-sm;
+  }
+  @media #{$md} {
+    margin-bottom: $frame-margin-y-md;
+  }
+  @media #{$lg} {
+    margin-bottom: $frame-margin-y-lg;
+  }
+}
+
+@mixin frame-padding-top {
+  padding-top: $frame-margin-y;
+  @media #{$sm} {
+    padding-top: $frame-margin-y-sm;
+  }
+  @media #{$md} {
+    padding-top: $frame-margin-y-md;
+  }
+  @media #{$lg} {
+    padding-top: $frame-margin-y-lg;
+  }
+}
+
+@mixin frame-padding-bottom {
+  padding-bottom: $frame-margin-y;
+  @media #{$sm} {
+    padding-bottom: $frame-margin-y-sm;
+  }
+  @media #{$md} {
+    padding-bottom: $frame-margin-y-md;
+  }
+  @media #{$lg} {
+    padding-bottom: $frame-margin-y-lg;
+  }
+}
+
+@mixin frame-margin-before-negative {
+  margin-top: $cont-padding-y * -1;
+  @media #{$sm} {
+    margin-top: $cont-padding-y-sm * -1;
+  }
+  @media #{$md} {
+    margin-top: $cont-padding-y-md * -1;
+  }
+  @media #{$lg} {
+    margin-top: $cont-padding-y-lg * -1;
+  }
+}
+
+@mixin frame-margin-after-negative {
+  margin-bottom: $cont-padding-y * -1;
+  @media #{$sm} {
+    margin-bottom: $cont-padding-y-sm * -1;
+  }
+  @media #{$md} {
+    margin-bottom: $cont-padding-y-md * -1;
+  }
+  @media #{$lg} {
+    margin-bottom: $cont-padding-y-lg * -1;
+  }
+}
+
+@mixin frame-margin-before-offset {
+  margin-top: calc(#{$frame-margin-y} + 29px);
+  @media #{$sm} {
+    margin-top: calc(#{$frame-margin-y-sm} + 29px);
+  }
+  @media #{$md} {
+    margin-top: calc(#{$frame-margin-y-md} + #{px-to-rem(43)});
+  }
+  @media #{$lg} {
+    margin-top: calc(#{$frame-margin-y-lg} + #{px-to-rem(43)});
+  }
+}
+
+@mixin container-margin-top {
+  margin-top: $cont-padding-y;
+  @media #{$sm} {
+    margin-top: $cont-padding-y-sm;
+  }
+  @media #{$md} {
+    margin-top: $cont-padding-y-md;
+  }
+  @media #{$lg} {
+    margin-top: $cont-padding-y-lg;
+  }
+}
+
+@mixin container-margin-bottom {
+  margin-bottom: $cont-padding-y;
+  @media #{$sm} {
+    margin-bottom: $cont-padding-y-sm;
+  }
+  @media #{$md} {
+    margin-bottom: $cont-padding-y-md;
+  }
+  @media #{$lg} {
+    margin-bottom: $cont-padding-y-lg;
+  }
+}
+
+@mixin clearfix-padding {
+  &:before {
+    content: '';
+    display: table;
+    clear: both;
+    @include container-margin-bottom;
+  }
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+    @include container-margin-top;
+  }
+}
+
+
+@mixin clearfix-padding-small {
+  &:before {
+    content: '';
+    display: table;
+    clear: both;
+    margin-bottom: $cont-padding-y / 2;
+    @media #{$sm} {
+      margin-bottom: $cont-padding-y-sm / 2;
+    }
+    @media #{$md} {
+      margin-bottom: $cont-padding-y-md / 2;
+    }
+    @media #{$lg} {
+      margin-bottom: $cont-padding-y-lg / 2;
+    }
+  }
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+    margin-top: $cont-padding-y / 2;
+    @media #{$sm} {
+      margin-top: $cont-padding-y-sm / 2;
+    }
+    @media #{$md} {
+      margin-top: $cont-padding-y-md / 2;
+    }
+    @media #{$lg} {
+      margin-top: $cont-padding-y-lg / 2;
+    }
+  }
+}
+
+@mixin button {
+  cursor: pointer;
+  display: inline-block;
+  font-size: px-to-rem(12);
+  padding: px-to-rem(12) px-to-rem(20);
+  line-height: 1.2em;
+  text-decoration: none;
+  font-weight: 900;
+  text-transform: uppercase;
+  background: none;
+  box-sizing: border-box;
+  color: $c-default;
+  border: $c-default solid 1px;
+  outline: none;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  font-style: inherit;
+  &:hover, &.act {
+    background: $c-default;
+    border: $c-default solid 1px;
+    color: $c-hover;
+  }
+}
+
+@mixin button-invert {
+  @include button;
+  background: $c-alert;
+  color: $c-default;
+  border: white solid 1px;
+  &:hover {
+    background: $c-default;
+  }
+}
+
+@mixin button-white {
+  @include button;
+  color: white;
+  border: white solid 1px;
+  &:hover {
+    background: $c-default;
+  }
+}
+
+
+@mixin input {
+  line-height: 1.2em; // at 1em bottom is cropped
+  height: px-to-rem(50);
+  padding: px-to-rem(10) px-to-rem(18);
+  box-sizing: border-box;
+  background-color: white;
+  border: $c-default solid 1px;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  font-size: 1rem;
+  color: $c-default;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  &[type=number] {
+    -moz-appearance: textfield;
+  }
+  &::-webkit-input-placeholder {
+    @include placeholder;
+  }
+  &::-moz-placeholder {
+    @include placeholder;
+  }
+  &:-ms-input-placeholder {
+    @include placeholder;
+  }
+  &:-moz-placeholder {
+    @include placeholder;
+  }
+}
+
+@mixin label-inline {
+  & + label, & + ul + label {
+    position: absolute;
+    left: px-to-rem(18);
+    right: px-to-rem(18);
+    top: px-to-rem(16);
+    transition: all 400ms;
+    pointer-events: none;
+    display: inline-block;
+    line-height: 1em;
+  }
+  &:focus, &.filled {
+    padding-top: px-to-rem(15);
+    padding-bottom: px-to-rem(5);
+  }
+  &:focus + label, &.filled + label,
+  &:focus + ul + label, &.filled + ul + label {
+    position: absolute;
+    font-size: px-to-rem(10);
+    top: px-to-rem(5);
+    transform: none;
+  }
+}
+
+@mixin icon-left {
+  text-decoration: none;
+  position: relative;
+  padding-left: 1.9em;
+  > span {
+    &:first-child {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1.9em;
+      left: 0;
+    }
+
+    &:last-child {
+      display: inline;
+      padding-left: .4em;
+    }
+  }
+}
+
+@mixin icon-right {
+  text-decoration: none;
+  position: relative;
+  padding-right: 1.9em;
+  > span {
+    &:first-child {
+      display: none;
+      @media #{$md} {
+        display: inline;
+        padding-right: .4em;
+      }
+    }
+
+    &:last-child {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1.9em;
+      right: 0;
+    }
+  }
+}

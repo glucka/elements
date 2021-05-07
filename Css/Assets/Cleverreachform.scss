@@ -1,0 +1,21 @@
+.frame-type-mask_cleverreachform {
+  .wrap-name{
+    @media #{$sm} {
+    @include grid-custom(16, $gutter, 4, 6, 6);
+    }
+  }
+  .field.checkbox > div {
+    position: relative;
+    padding: 10px;
+    input[type=checkbox] {
+      position: absolute;
+      top: 14px;
+      left: 11px;
+    }
+    p {
+      margin: 0;
+      padding-left: 27px;
+      font-size: 14px;
+    }
+  }
+}

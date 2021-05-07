@@ -1,0 +1,149 @@
+html {
+  background: white;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: white;
+  position: relative;
+  min-height: 100%;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  padding-top: $headerHeight;
+  overscroll-behavior: none;
+
+  @media #{$sm} {
+    padding-top: $headerHeightSm;
+  }
+
+  &.debug.show-grid:before {
+    content: '';
+    position: absolute;
+    z-index: 50000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    background-repeat: repeat-x;
+    background-image: linear-gradient(to right, transparent #{$gutter}, rgba(0, 255, 255, .5) #{$gutter}, rgba(0, 255, 255, .25) calc(100% / #{$cols} - #{$gutter}));
+    background-size: calc((100% + #{$gutter}) / #{$cols});
+    background-position: -#{$gutter};
+  }
+
+  &.show-wrap-cart-teaser {
+    overflow-y: hidden;
+  }
+
+  &.visible-filter {
+    &:before {
+      width: 100%;
+    }
+  }
+
+  &.topcontent {
+    padding-top: 0;
+  }
+
+  &.show-wrap-cart-teaser {
+    overflow-y: hidden;
+  }
+
+  &.visible-menu-ended {
+    overflow-y: hidden;
+  }
+
+  &.wait {
+    cursor: wait !important;
+
+    * {
+      pointer-events: none;
+    }
+  }
+
+}
+
+header {
+  @include clearfix;
+  position: fixed;
+  width: 100%;
+  height: $headerHeight;
+  z-index: 500;
+  transition: all 400ms;
+  top: 0;
+  background: white;
+  @media #{$sm} {
+    height: $headerHeightSm;
+  }
+
+  @at-root body.topbanner & {
+    height: $headerHeight + $headerBannerHeight;
+    @media #{$sm} {
+      height: $headerHeightSm + $headerBannerHeightSm;
+    }
+  }
+
+  @at-root body.scrolled-down.scrolled-downwards & {
+    @media (max-width: 767px) {
+      transform: translateY(-105%);
+    }
+  }
+  @at-root body.topcontent & {
+    background: transparent;
+  }
+  @at-root body.topcontent.scroll-started & {
+    background: white;
+  }
+
+  .topbanner {
+    display: block;
+    background: #333B33;
+    text-transform: uppercase;
+    color: white;
+    text-align: center;
+    padding-top: px-to-rem(9);
+    box-sizing: border-box;
+    height: $headerBannerHeight;
+    @media #{$sm} {
+      height: $headerBannerHeightSm;
+    }
+  }
+
+  > div:last-child {
+    position: relative;
+    height: $headerHeightSm;
+
+    .logo {
+      display: block;
+      width: 80px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: all 400ms;
+      @at-root body.scrolled-down & {
+        width: 60px;
+      }
+    }
+
+    nav.lang {
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 15px;
+      text-transform: uppercase;
+      @media #{$sm} {
+        margin-right: 35px;
+      }
+
+      span {
+        padding: 0 5px;
+
+        &:first-child {
+          display: none;
+        }
+      }
+    }
+  }
+}
+

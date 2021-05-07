@@ -1,0 +1,231 @@
+// default theme
+.lg-actions {
+  .lg-next, .lg-prev {
+    color: $lg-next-prev-color;
+    cursor: pointer;
+    display: block;
+    font-size: 22px;
+    margin-top: -10px;
+    position: absolute;
+    top: 50%;
+    z-index: $zindex-controls;
+
+    &.disabled {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    &:hover {
+      color: $lg-next-prev-hover-color;
+    }
+  }
+
+  .lg-next {
+    right: 20px;
+    &:before {
+      display: block;
+      width: px-to-rem(37);
+      height: px-to-rem(100);
+      content: "";
+      background-image: url(/typo3conf/ext/theme/Resources/Public/Svg/lightboxArrow.svg);
+      background-repeat: no-repeat;
+      background-position: center center;
+      transform: rotate(180deg);
+    }
+  }
+
+  .lg-prev {
+    left: 20px;
+    &:before {
+      display: block;
+      width: px-to-rem(37);
+      height: px-to-rem(100);
+      content: "";
+      background-image: url(/typo3conf/ext/theme/Resources/Public/Svg/lightboxArrow.svg);
+      background-repeat: no-repeat;
+      background-position: center center;
+      transform: rotate(0deg);
+    }
+  }
+}
+
+@include keyframes(lg-right-end) {
+  0% {
+    left: 0;
+  }
+
+  50% {
+    left: -30px;
+  }
+
+  100% {
+    left: 0;
+  }
+}
+
+
+@include keyframes(lg-left-end) {
+  0% {
+    left: 0;
+  }
+
+  50% {
+    left: 30px;
+  }
+
+  100% {
+    left: 0;
+  }
+}
+
+
+.lg-outer {
+  &.lg-right-end {
+    .lg-object {
+      @include animation(lg-right-end 0.3s);
+      position: relative;
+    }
+  }
+
+  &.lg-left-end {
+    .lg-object {
+      @include animation(lg-left-end 0.3s);
+      position: relative;
+    }
+  }
+}
+
+// lg toolbar
+.lg-toolbar {
+  z-index: $zindex-toolbar;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background-color: $lg-toolbar-bg;
+
+  .lg-icon {
+    color: $lg-toolbar-icon-color;
+    cursor: pointer;
+    float: right;
+    font-size: 24px;
+    height: 47px;
+    line-height: 27px;
+    padding: 10px 0;
+    text-align: center;
+    width: 50px;
+    text-decoration: none !important;
+    outline: medium none;
+    @include transition(color 0.2s linear);
+
+    &:hover {
+      color: $lg-toolbar-icon-hover-color;
+    }
+  }
+
+  .lg-close {
+    display: inline-block;
+    box-sizing: content-box;
+    background: rgba(255, 255, 255, 1);
+    width: px-to-rem(20);
+    height: px-to-rem(20);
+    padding: 10px;
+
+    &:before {
+      display: block;
+      width: px-to-rem(20);
+      height: px-to-rem(20);
+      content: "";
+      background-size: px-to-rem(20) px-to-rem(20);
+      background-image: url(/typo3conf/ext/theme/Resources/Public/Svg/close.svg);
+      background-repeat: no-repeat;
+      background-position: center center;
+      transform: rotate(90deg);
+    }
+  }
+
+  .lg-download {
+    &:after {
+      content: "\e0f2";
+    }
+  }
+}
+
+// lightGallery title
+.lg-sub-html {
+  background-color: $lg-sub-html-bg;
+  bottom: 0;
+  color: $lg-sub-html-color;
+  font-size: 16px;
+  left: 0;
+  padding: 10px 40px;
+  position: fixed;
+  right: 0;
+  text-align: center;
+  z-index: $zindex-subhtml;
+
+  h4 {
+    margin: 0;
+    font-size: 13px;
+    font-weight: bold;
+  }
+
+  p {
+    font-size: 12px;
+    margin: 5px 0 0;
+  }
+}
+
+// lg image counter
+#lg-counter {
+  display: none;
+  color: $lg-icon-color;
+  font-size: $lg-counter-font-size;
+  padding-left: 20px;
+  padding-top: 12px;
+  vertical-align: middle;
+}
+
+// for idle state
+.lg-toolbar, .lg-prev, .lg-next {
+  opacity: 1;
+  @include transitionCustom(transform 0.35s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.35s cubic-bezier(0, 0, 0.25, 1) 0s, color 0.2s linear);
+}
+
+.lg-hide-items {
+  .lg-prev {
+    opacity: 0;
+    @include translate3d(-10px, 0, 0);
+  }
+
+  .lg-next {
+    opacity: 0;
+    @include translate3d(10px, 0, 0);
+  }
+
+  .lg-toolbar {
+    opacity: 0;
+    @include translate3d(0, -10px, 0);
+  }
+}
+
+// Starting effect
+body:not(.lg-from-hash) {
+  .lg-outer {
+    &.lg-start-zoom {
+      .lg-object {
+        @include scale3d(0.5, 0.5, 0.5);
+        opacity: 0;
+        @include transitionCustom(transform 250ms cubic-bezier(0, 0, 0.25, 1) 0s, opacity 250ms cubic-bezier(0, 0, 0.25, 1) !important);
+        @include transform-origin(50% 50%);
+      }
+
+      .lg-item.lg-complete {
+        .lg-object {
+          @include scale3d(1, 1, 1);
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

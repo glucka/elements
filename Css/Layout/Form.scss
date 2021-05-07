@@ -1,0 +1,252 @@
+form {
+  width: 100%;
+}
+
+[data-showifrequired] {
+  display: none;
+}
+
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: none;
+
+  legend {
+    box-sizing: border-box; /* 1 */
+    color: inherit; /* 2 */
+    //display: table; /* 1 */
+    max-width: 100%; /* 1 */
+    padding: 0; /* 3 */
+    white-space: normal; /* 1 */
+    display: none;
+  }
+}
+
+input[type=text], input[type=email], input[type=password], input[type=date], input[type=number], input[type=file] {
+  @include input;
+  @include label-inline;
+  width: 100%;
+}
+
+input[type=radio] {
+  margin-right: px-to-rem(3);
+  margin-left: px-to-rem(11);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+select {
+  @include input;
+  @include label-inline;
+  width: 100%;
+  min-width: px-to-rem(120);
+  padding-right: px-to-rem(35);
+  background-image: url(/typo3conf/ext/theme/Resources/Public/Svg/arrow.svg);
+  background-position: right px-to-rem(5) center;
+  background-repeat: no-repeat;
+  background-size: px-to-rem(12);
+  position: relative;
+  z-index: 2;
+  @media #{$sm} {
+    background-position: right px-to-rem(10) center;
+  }
+
+  &::-ms-expand {
+    display: none;
+  }
+
+  &[disabled] {
+    padding-right: px-to-rem(10);
+    background-image: none;
+  }
+
+  & + label {
+    z-index: 5;
+  }
+
+}
+
+textarea {
+  @include input;
+  @include label-inline;
+  width: 100%;
+  height: px-to-rem(120);
+
+  &:focus, &.filled {
+    padding: px-to-rem(21) px-to-rem(18) px-to-rem(5) px-to-rem(18);
+  }
+}
+
+
+.wrap-field {
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.field {
+  position: relative;
+  margin-bottom: $field-margin-y;
+
+  &.file {
+    &:before {
+      content: '';
+      position: absolute;
+      width: calc(100% - 2px);
+      height: px-to-rem(50);
+      border: $c-default solid 1px;
+      background: white;
+    }
+
+    &:after {
+      content: attr(data-label);
+      font-size: 1rem;
+      color: $c-default;
+      position: absolute;
+      z-index: 1;
+      top: 18px;
+      right: 18px;
+      bottom: 2px;
+      left: 18px;
+      overflow: hidden;
+    }
+
+    input {
+      opacity: 0;
+      position: relative;
+      z-index: 10;
+    }
+  }
+
+  &.requiredInfo {
+    margin-top: $field-margin-y;
+    margin-bottom: $field-margin-y * 2;
+    line-height: 1.5em;
+  }
+
+  &.has-danger {
+    input[type=text], input[type=email], input[type=password], input[type=date], input[type=number], select, textarea {
+      border: $c-alert solid 1px;
+    }
+
+    label {
+      color: $c-alert;
+
+      a {
+        color: $c-alert;
+      }
+    }
+
+    .pristine-error {
+      padding: px-to-rem(5);
+      color: $c-alert;
+    }
+  }
+
+  &.checkbox {
+    border: transparent solid 1px;
+    padding: px-to-rem(10);
+
+    &.has-danger {
+      border: $c-alert solid 1px;
+    }
+
+    > label {
+      display: inline-block;
+      vertical-align: top;
+      width: calc(100% - #{px-to-rem(20)});
+
+      a {
+        @include underline();
+      }
+
+      > input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+
+        &:checked + span:after {
+          display: block;
+        }
+
+        & + span {
+          position: absolute;
+          top: px-to-rem(9);
+          left: px-to-rem(10);
+          height: px-to-rem(24);
+          width: px-to-rem(24);
+          border: $c_default solid 1px;
+          transform: scale(.8);
+          @media #{$sm} {
+            transform: scale(1);
+          }
+
+          &:after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: px-to-rem(9);
+            top: px-to-rem(4);
+            width: px-to-rem(5);
+            height: px-to-rem(10);
+            border: solid $c-default;
+            border-width: 0 3px 3px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+          }
+        }
+      }
+    }
+
+    p {
+      display: inline-block;
+      vertical-align: top;
+      margin: 0 0 0 px-to-rem(50);
+      line-height: 1.4em;
+      font-size: 80%;
+      @media #{$sm} {
+        font-size: 100%;
+      }
+    }
+
+    .pristine-error {
+      margin-left: px-to-rem(45);
+    }
+  }
+
+  &.hidden{
+    display: none;
+  }
+}
+
+.tx-powermail {
+
+  .wrap-field_name {
+    display: inline-block;
+    vertical-align: top;
+    width: calc(50% - 10px);
+    margin-right: 10px;
+  }
+
+  .wrap-field_nachname {
+    display: inline-block;
+    width: calc(50% - 10px);
+    margin-left: 10px;
+  }
+
+}
+
+button, [type=submit], .button {
+  @include button;
+
+  &[disabled] {
+    opacity: 0.3;
+  }
+}

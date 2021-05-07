@@ -1,0 +1,101 @@
+footer {
+  > * {
+    @extend .frame-default;
+  }
+}
+
+
+.imp {
+  border: white 30px solid;
+  position: relative;
+  z-index: 85;
+  background: white;
+  text-align: center;
+  line-height: 30px;
+  color: $c-default;
+  @media #{$smd} {
+    text-align: left;
+  }
+
+  a:hover, a.act{
+      color: $c-hover;
+    }
+
+  > div {
+    position: relative;
+
+    > a, > span {
+      margin-right: 7px;
+      margin-left: 7px;
+      display: inline-block;
+
+      &:first-child {
+        @media #{$smd} {
+          margin-left: 0;
+        }
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      @media #{$smd} {
+        margin-right: 20px;
+        margin-left: 20px;
+      }
+    }
+  }
+}
+
+.created-weco {
+  text-align: center;
+  margin: 10px 0 0 0;
+  font-size: 14px;
+  @media #{$sm} {
+  font-size: px-to-rem(16);
+  }
+  @media #{$smd} {
+    float: right;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  a {
+    @include icon-right;
+    display: inline-block;
+
+    > span:first-child {
+      padding-right: .4em;
+      display: inline;
+    }
+  }
+}
+
+
+.created-dw {
+  position: absolute;
+  right: 3.125rem;
+  bottom: 0;
+  /*transform: translateY(100%);*/
+  font-size: 13px;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0;
+
+  a {
+    text-decoration: none;
+    position: relative;
+    display: block;
+    padding-left: 4.3em;
+
+    > span:first-child {
+      position: absolute;
+      left: 0;
+      width: 4.3em;
+      top: 0;
+    }
+
+    > span:last-child {
+      padding-left: .4em;
+    }
+  }
+}

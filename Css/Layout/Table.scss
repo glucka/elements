@@ -1,0 +1,24 @@
+.frame-type-table table {
+  thead {
+    display: none;
+    @media #{$sm} {
+      display: table-row-group;
+    }
+  }
+
+  tbody {
+    td {
+      display: block;
+      &:before {
+        content: attr(data-th);
+        display: block;
+      }
+      @media #{$sm} {
+        display: table-cell;
+        &:before {
+          display: none;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,90 @@
+.frame-type-mask_newsflash {
+  display: none;
+  position: fixed;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  bottom: 0;
+  z-index: 86;
+  @at-root body.visible-newsflash & {
+    display: block;
+  }
+  > div {
+    width: 100%;
+    max-width: 940px;
+    margin: 0 auto;
+    color: white;
+    background: $c-default;
+    text-align: center;
+    padding: 40px;
+    position: relative;
+    box-shadow: 10px 10px 75px 0 rgba(0, 0, 0, .3);
+    box-sizing: border-box;
+
+    > div.close {
+      padding: 10px;
+      position: absolute;
+      right: px-to-rem(5);
+      top:px-to-rem(5);
+      cursor: pointer;
+      img{
+        width: px-to-rem(20);
+      }
+
+    }
+
+    > div.img {
+      display: none;
+      @media #{$sm} {
+        display: inline-block;
+        vertical-align: middle;
+        padding-left: 15px;
+        padding-right: 15px;
+        box-sizing: border-box;
+        width: 266px;
+      }
+      @media #{$md} {
+        padding-left: 32px;
+        padding-right: 32px;
+        width: 300px;
+
+      }
+    }
+
+    > div.txt {
+      display: inline-block;
+      vertical-align: middle;
+      text-align: center;
+      @media #{$sm} {
+        padding-left: 15px;
+        padding-right: 15px;
+        box-sizing: border-box;
+        text-align: left;
+        width: calc(100% - 266px);
+      }
+      @media #{$md} {
+        padding-left: 32px;
+        padding-right: 32px;
+        width: auto;
+        max-width: calc(100% - 300px);
+      }
+
+      &.align-center {
+        text-align: center;
+      }
+
+      p {
+        @extend h2;
+        margin: 0;
+        line-height: 1.2em;
+      }
+
+      a {
+        @include button-invert;
+        margin-top: 20px;
+      }
+    }
+  }
+
+
+}

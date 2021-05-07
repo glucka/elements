@@ -1,0 +1,182 @@
+/* roboto-regular - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'),
+  url('/typo3conf/ext/theme/Resources/Public/Fonts/roboto-v18-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+  url('/typo3conf/ext/theme/Resources/Public/Fonts/roboto-v18-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* roboto-500 - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Roboto Medium'), local('Roboto-Medium'),
+  url('/typo3conf/ext/theme/Resources/Public/Fonts/roboto-v18-latin-500.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+  url('/typo3conf/ext/theme/Resources/Public/Fonts/roboto-v18-latin-500.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+::-moz-selection { /* Code for Firefox */
+  color: black;
+  background: white;
+}
+
+::selection {
+  color: black;
+  background: white;
+}
+
+strong {
+  font-weight: 900;
+}
+
+
+html {
+  font-size: 16px;
+  color: $c-default;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Roboto', sans-serif;
+  @media (min-width: 1600px) {
+    font-size: 115%;
+  }
+  @media (min-width: 1900px) and (min-height: 1200px) {
+    font-size: 135%;
+  }
+}
+
+body {
+  font-size: px-to-rem(16);
+  line-height: 1em;
+}
+
+h1 {
+  font-size: 36px;
+  line-height: 1.2em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  @media #{$sm} {
+    font-size: px-to-rem(36);
+  }
+  @at-root body.layout2 &{
+    text-align: left;
+  }
+}
+
+h2 {
+  font-size: 30px;
+  line-height: 1.2em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  @media #{$sm} {
+    font-size: px-to-rem(30);
+  }
+  @at-root body.layout2 &{
+    text-align: left;
+  }
+}
+
+h3 {
+  font-size: 26px;
+  line-height: 1.2em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  @media #{$sm} {
+    font-size: px-to-rem(26);
+  }
+  @at-root body.layout2 &{
+    text-align: left;
+  }
+}
+
+h4 {
+  font-size: 17px;
+  line-height: 1.2em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  @media #{$sm} {
+    font-size: px-to-rem(17);
+  }
+  @at-root body.layout2 &{
+    text-align: left;
+  }
+}
+
+h5 {
+  font-size: 17px;
+  line-height: 1.2em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  @media #{$sm} {
+    font-size: px-to-rem(17);
+  }
+  @at-root body.layout2 &{
+    text-align: left;
+  }
+}
+
+p {
+  line-height: 2em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  @at-root body.layout2 &{
+    text-align: left;
+  }
+
+  &.h1 {
+    @extend h1;
+  }
+
+  @at-root .frame > & {
+    &:first-child {
+      //margin-top: -.35em;
+    }
+
+    &:last-child {
+      //margin-bottom: -.35em;
+    }
+  }
+
+}
+
+.frame-type-text ul, #iub-pp-container ul, .frame-type-menu_sitemap_pages ul {
+  @extend p;
+  text-align: left;
+  padding-left: 20px;
+
+  li {
+    list-style: none;
+    position: relative;
+    padding-left: px-to-rem(40);
+
+    &:before {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    a {
+      @include underline();
+    }
+  }
+
+  > li {
+    &:before {
+      content: url("/typo3conf/ext/theme/Resources/Public/Svg/li.svg");
+      //content: '\2022';
+    }
+
+    > ul > li {
+      &:before {
+        content: url("/typo3conf/ext/theme/Resources/Public/Svg/lili.svg");
+        //content: '\2022';
+      }
+    }
+  }
+}
