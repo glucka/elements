@@ -40,6 +40,7 @@ nav.path {
 }
 
 section.content {
+  background-color: gray;
   @include clearfix-padding;
   hyphens: auto;
 }

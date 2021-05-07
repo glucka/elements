@@ -3,7 +3,7 @@
 
   > div {
     @include grid(8,8,8);
-
+    justify-content: space-between;
     align-items: center;
 
     &.swap > * {
