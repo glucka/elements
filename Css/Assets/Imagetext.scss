@@ -2,7 +2,7 @@
   overflow: hidden;
 
   > div {
-    @include grid(8,8,8);
+    @include grid(6,6,6);
     justify-content: space-between;
     align-items: center;
 
