@@ -1,0 +1,60 @@
+.frame-type-mask_coverslider {
+  position: relative;
+  color: white;
+
+  .cover {
+    background-size: cover;
+    background-position: center;
+    height: calc(100vh);
+    height: calc(var(--vh, 1vh) * 100);
+  }
+
+
+  .coverslider {
+
+    @extend .slider;
+
+    > div > div {
+
+      > div {
+        width: 100%;
+        position: relative;
+        height: calc(100vh);
+        height: calc(var(--vh, 1vh) * 100);
+        background-size: cover;
+        background-position: center;
+        overflow: hidden;
+        will-change: background-position-x;
+
+        &.nextAct > * {
+          animation-name: fadeIn;
+          animation-fill-mode: forwards;
+        }
+
+        > div {
+          &:before {
+            @include gradient;
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+          }
+
+          .over {
+            position: relative;
+            z-index: 10;
+          }
+        }
+      }
+    }
+
+    nav.arrows, nav.dots {
+      display: none;
+    }
+
+  }
+
+
+}

@@ -7,14 +7,15 @@
   height: 100%;
   max-width: 100%;
   z-index: 1000;
-  background: $c-default;
+  background: #ffffff;
   @at-root body.visible-rotate & {
-    @media (min-aspect-ratio: 16/9) and (max-width: 768px) {
+    @media (min-aspect-ratio: 16/10) and (max-width: 1279px) {
       display: flex;
       align-items: center;
       justify-content: center;
     }
   }
+
 
   > div.close {
     padding: 10px;

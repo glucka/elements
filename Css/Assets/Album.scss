@@ -1,0 +1,8 @@
+.frame-type-mask_album {
+  overflow: hidden;
+
+  > div {
+    @include grid(4);
+  }
+
+}

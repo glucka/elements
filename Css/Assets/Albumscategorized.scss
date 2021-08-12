@@ -1,0 +1,82 @@
+.frame-type-mask_albumscategorized {
+  .wrap-field {
+    @extend .frame-4-4;
+    margin-bottom: $frame-margin-y;
+    @media #{$sm} {
+      margin-bottom: $frame-margin-y-sm;
+    }
+    @media #{$smd} {
+      display: none;
+    }
+  }
+
+
+  .tabs {
+    @extend .frame-4-4;
+    display: none;
+    justify-content: space-between;
+    margin-bottom: 70px;
+    @media #{$smd} {
+      display: flex;
+    }
+
+    > * {
+      @include button;
+
+      &.act {
+        background: transparent;
+        color: $c-default;
+        border: $c-default solid 1px;
+      }
+    }
+  }
+
+  .contents {
+    @extend .frame-2-2;
+    columns: 2;
+    column-gap: 6vw;
+    @media #{$md} {
+      column-gap: 70px;
+    }
+
+    a {
+      display: none;
+      margin-bottom: 0;
+      margin-top: 0;
+      page-break-inside: avoid;
+      break-inside: avoid;
+      -webkit-column-break-inside: avoid;
+      padding-bottom: $frame-margin-y;
+      @media #{$sm} {
+        padding-bottom: 6vw;
+      }
+      @media #{$md} {
+        padding-bottom: 70px;
+      }
+
+      &.show {
+        display: block;
+        width: 100%;
+        height: auto;
+        transform: scale(1);
+
+      }
+    }
+
+    > * + * {
+      margin-top: 0;
+    }
+
+    > *.show + *.show {
+      padding-bottom: $frame-margin-y;
+      @media #{$sm} {
+        padding-bottom: 6vw;
+      }
+      @media #{$md} {
+        padding-bottom: 70px;
+      }
+    }
+
+
+  }
+}

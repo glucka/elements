@@ -9,7 +9,7 @@
   @at-root body.visible-newsflash & {
     display: block;
   }
-  > div {
+  > div > div {
     width: 100%;
     max-width: 940px;
     margin: 0 auto;

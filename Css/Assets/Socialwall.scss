@@ -1,0 +1,37 @@
+.frame-type-mask_socialwall {
+  position: relative;
+  overflow: hidden;
+
+  @include grid(3);
+
+  .feed-el {
+    padding: 10px;
+    box-sizing: border-box;
+    position: relative;
+
+    .footer {
+      position: relative;
+      min-height: 60px;
+
+      > div {
+        padding-left: px-to-rem(80);
+        padding-top: px-to-rem(30);
+      }
+
+      > svg {
+        position: absolute;
+        left: px-to-rem(20);
+        top: px-to-rem(30);
+        width: px-to-rem(30);
+      }
+    }
+
+    a.img {
+      display: block;
+      padding-bottom: 100%;
+      overflow: hidden;
+      height: 0;
+      background-size: cover;
+    }
+  }
+}

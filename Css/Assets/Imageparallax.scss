@@ -1,0 +1,22 @@
+.frame-type-mask_imageparallax > div {
+  > div {
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    height: 0;
+    padding-top: 30%;
+    position: relative;
+    @at-root body.ios &{
+      background-attachment: scroll;
+    }
+
+    .title {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      font-size: 40px;
+      text-transform: uppercase;
+      color: white;
+    }
+  }
+}

@@ -9,6 +9,8 @@
     position: absolute;
     top: 50%;
     z-index: $zindex-controls;
+    padding: 0;
+    border:none;
 
     &.disabled {
       pointer-events: none;
@@ -130,6 +132,7 @@
     width: px-to-rem(20);
     height: px-to-rem(20);
     padding: 10px;
+    border:none;
 
     &:before {
       display: block;

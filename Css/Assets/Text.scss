@@ -1,0 +1,11 @@
+.frame-type-text {
+  p {
+    a {
+      @include underline();
+      &.button {
+        background-image: none;
+        @include button;
+      }
+    }
+  }
+}

@@ -1,22 +1,20 @@
 .frame-type-mask_imagetext {
   overflow: hidden;
 
-  > div {
-    @include grid(6,6,6);
-    justify-content: space-between;
-    align-items: center;
-
-    &.swap > * {
-      @media #{$sm} {
-        &:nth-child(1) {
-          order: 2;
-          margin-right: 0;
-        }
-        &:nth-child(1) {
-          order: 1;
-          margin-left: #{$gutter};
-        }
+  /* swap */
+  &.frame-layout-3 > div * {
+    @media #{$sm} {
+      &:nth-child(1) {
+        order: 2;
+      }
+      &:nth-child(1) {
+        order: 1;
       }
     }
+  }
+
+  > div {
+    @include grid(2);
+    align-items: center;
   }
 }

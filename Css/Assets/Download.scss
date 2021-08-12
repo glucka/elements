@@ -1,0 +1,18 @@
+.frame-type-mask_download > div {
+  a {
+    > span {
+      font-size: px-to-rem(14);
+      display: block;
+
+      &:first-child {
+        color: $c-blue;
+        font-weight: 700;
+      }
+
+      &:last-child {
+        font-weight: 300;
+      }
+    }
+  }
+
+}

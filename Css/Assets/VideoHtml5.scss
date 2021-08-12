@@ -1,0 +1,33 @@
+.frame-type-mask_videohtml5 {
+  > div{
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    > button {
+      cursor: pointer;
+      width: 115px;
+      background: transparent;
+      border: none;
+      position: absolute;
+      z-index: 10;
+      outline: none;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 0;
+      .hover{
+        transition: all 400ms;
+        fill: gray;
+      }
+      &:hover .hover {
+        fill: $c-hover;
+      }
+    }
+  }
+  video{
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: 0;
+  }
+}

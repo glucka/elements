@@ -384,9 +384,90 @@ template {
 /* Hidden   ================================================== */
 
 
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 0;
+
+  &.unresp {
+    width: auto;
+    height: auto;
+
+    &.center {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  &.lazyloading {
+    background: transparent url(/typo3conf/ext/theme/Resources/Public/Svg/preloader.svg) no-repeat center;
+  }
+
+}
+
+svg {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  display: block;
+  fill: currentColor;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+
+  th {
+    text-align: left;
+  }
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+
+  li {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+script {
+  display: none !important;
+}
+
+div[data-link] {
+  cursor: pointer;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
 .frame {
   @include frame-margin-top;
   @include frame-margin-bottom;
+  @include grid(24);
 
   &.frame-space-before-none {
     margin-top: 0;
@@ -500,7 +581,7 @@ template {
     }
   }
 
-  &.frame-space-before-negative {
+    &.frame-space-before-negative {
     @include frame-margin-before-negative;
   }
 
@@ -508,142 +589,82 @@ template {
     @include frame-margin-after-negative;
   }
 
+  &.frame-space-before-negative-offset {
+    @include frame-margin-before-negative-offset;
+  }
+
+  &.frame-space-after-negative-offset {
+    @include frame-margin-after-negative-offset;
+  }
+
   &.frame-space-before-offset {
     @include frame-margin-before-offset;
   }
 
-}
-
-
-img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border: 0;
-
-  &.unresp {
-    width: auto;
-    height: auto;
-
-    &.center {
-      margin-left: auto;
-      margin-right: auto;
-    }
-  }
-
-  &.lazyloading {
-    background: transparent url(/typo3conf/ext/theme/Resources/Public/Svg/preloader_white.svg) no-repeat center;
+  &.frame-space-after-offset {
+    @include frame-margin-after-offset;
   }
 
 }
 
-svg {
-  width: 100%;
-  height: auto;
-  max-height: 100%;
-  display: block;
-  fill: currentColor;
-}
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  width: 100%;
-
-  th {
-    text-align: left;
-  }
-}
-
-ul {
-  padding: 0;
-  margin: 0;
-
-  li {
-    margin: 0;
-    padding: 0;
-  }
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-script {
-  display: none !important;
-}
-
-div[data-link] {
-  cursor: pointer;
-}
-
-.text-left {
-  text-align: left;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-right {
-  text-align: right;
-}
-
-.text-justify {
-  text-align: justify;
-}
-
-.frame-extra-small {
-  @include gr(18, 3);
+.frame-9-9 > div {
+  grid-column: 2/-2;
   @media #{$sm} {
-    @include gr(12, 4);
+    grid-column: 10/-10;
   }
 }
 
-.frame-small {
-  @include gr(20, 2);
+.frame-8-8 > div {
+  grid-column: 2/-2;
   @media #{$sm} {
-    @include gr(10, 7);
+    grid-column: 9/-9;
   }
 }
 
-.frame-default {
-  @include gr(20, 2);
+.frame-4-4 > div {
+  grid-column: 2/-2;
   @media #{$sm} {
-    @include gr(16, 4);
+    grid-column: 5/-5;
+  }
+
+}
+
+.frame-3-3 > div {
+  grid-column: 2/-2;
+  @media #{$sm} {
+    grid-column: 4/-4;
   }
 }
 
-.frame-large {
-  @include gr(22, 1);
+.frame-2-2 > div {
+  grid-column: 3/-3;
+}
+
+
+.frame-0-10 > div {
+  grid-column: 1/-2;
   @media #{$sm} {
-    @include gr(18, 3);
+    grid-column: 1/-11;
   }
 }
 
-.frame-extra-large {
-  @include gr(22, 1);
+.frame-10-0 > div {
+  grid-column: 2/-1;
   @media #{$sm} {
-    @include gr(20, 2);
+    grid-column: 11/-1;
   }
 }
 
 .frame-full-padding {
-  padding-left: 4vw;
-  padding-right: 4vw;
-  box-sizing: border-box;
+  display: block;
+
+  > div {
+    margin-left: 4vw;
+    margin-right: 4vw;
+    box-sizing: border-box;
+  }
 }
 
-.frame-left {
-  @include gr(10, 4);
-}
-
-.frame-left-image {
-  @include gr(20, 0);
-}
-
-.frame-right {
-  @include gr(20, 4);
+.frame-full {
+  display: block;
 }

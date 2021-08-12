@@ -1,0 +1,33 @@
+.frame-type-mask_columns {
+  > div {
+    > div {
+      > *:first-child {
+        margin-top: 0;
+      }
+
+      > *:last-child {
+        margin-bottom: 0;
+      }
+
+      & > div > div {
+        grid-column: 1/-1;
+      }
+    }
+  }
+
+  &.col-50-50 > div {
+    @include grid(1, $frame-margin-y, 1);
+    @media #{$sm} {
+      @include grid(2);
+    }
+  }
+
+  &.col18-12-6 > div {
+    @include grid(1, $frame-margin-y, 1);
+    @media #{$sm} {
+      @include grid(18, $gutter, 12, 6);
+    }
+  }
+
+
+}

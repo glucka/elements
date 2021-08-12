@@ -1,5 +1,6 @@
 $base-font-size: 16;
-$base-layout-size: 1280;
+$base-layout-width: 1280;
+$base-layout-height: 800;
 
 @function strip-units($val) {
   @return $val / ($val * 0 + 1);
@@ -13,16 +14,20 @@ $base-layout-size: 1280;
   @return strip-units($px) / $base-px * 1rem;
 }
 
-@function px-to-vw($px, $base-layout: $base-layout-size) {
-  @return strip-units($px) / $base-layout-size * 100vw;
+@function px-to-vw($px, $base-layout: $base-layout-width) {
+  @return strip-units($px) / $base-layout-width * 100vw;
+}
+
+@function px-to-vh($px, $base-layout: $base-layout-height) {
+  @return strip-units($px) / $base-layout-height * 100vh;
 }
 
 @function pt-to-px($pt) {
   @return strip-units($pt) * 1.333px;
 }
 
-@function pt-to-vw($pt, $base-layout: $base-layout-size) {
-  @return strip-units($pt) * 1.333 / $base-layout-size * 100vw;
+@function pt-to-vw($pt, $base-layout: $base-layout-width) {
+  @return strip-units($pt) * 1.333 / $base-layout-width * 100vw;
 }
 
 @function gr-width-custom($cols, $gutter, $width) {
@@ -78,8 +83,6 @@ $c-gray-footer: #5d6367;
 $c-yellow-trans: rgba(255, 196, 3, 0.5);
 $c-blue: #30368b;
 
-$c-html: white;
-$c-body: white;
 $c-default: #333B33;
 $c-alert: red;
 $c-hover: green;
@@ -118,7 +121,6 @@ $c-alert-trans: $c-yellow-trans;
   }
 }
 
-
 @mixin gradient {
   background-image: linear-gradient(45deg, #ddabbe, #547fce);
 }
@@ -130,54 +132,30 @@ $c-alert-trans: $c-yellow-trans;
   background-size: 1px 1px;
 }
 
-@mixin gr-custom($cols, $gutter, $width, $offset:0) {
-  width: gr-width-custom($cols, $gutter, $width);
+@mixin grid($cols: $cols, $gap: $gutter, $widths...) {
+  display: grid;
+  grid-template-columns: repeat($cols, minmax(0, 1fr));
+  grid-template-rows: auto;
+  column-gap: $gap;
+  row-gap: $gap;
 
-  @if $offset != 0 {
-    margin-left: #{gr-width-brutto-custom($cols, $gutter, $offset)};
-  }
-}
 
-@mixin gr($width, $offset:0) {
-  @include gr-custom($cols, $gutter, $width, $offset);
-}
+  @if length($widths) > 0 {
 
-@mixin grid-custom($cols, $gutter, $widths...) {
-  display: flex;
-  flex: 0 1 auto;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: center;
+    $track: 1;
+    @for $i from 1 through length($widths) {
 
-  @for $i from 1 through length($widths) {
-    $width: nth($widths, $i);
-    $elementsInRow: length($widths);
-
-    > *:nth-child(#{$i}n) {
-      @include gr-custom($cols, $gutter, $width);
-      margin-right: #{$gutter};
-      @at-root body.firefox & {
-        margin-right: #{$gutter};
+      $width: nth($widths, $i);
+      @if $track + $width > $cols + 1{
+        $track: 1;
       }
-    }
-    > *:nth-child(#{$elementsInRow}n) {
-      margin-right: 0;
-      @at-root body.firefox & {
-        margin-right: -.5px;
+      > *:nth-child(#{$i}) {
+        grid-column: #{$track}/#{$track + $width};
       }
-    }
-    > *:last-child {
-      margin-right: 0;
-      @at-root body.firefox & {
-        margin-right: -.5px;
-      }
+      $track: $track + $width;
     }
   }
 
-}
-
-@mixin grid($widths...) {
-  @include grid-custom($cols, $gutter, $widths...)
 }
 
 
@@ -185,7 +163,6 @@ $c-alert-trans: $c-yellow-trans;
   color: $c-default;
   text-transform: uppercase;
 }
-
 
 @mixin clearfix {
   &:before {
@@ -277,16 +254,55 @@ $c-alert-trans: $c-yellow-trans;
   }
 }
 
-@mixin frame-margin-before-offset {
-  margin-top: calc(#{$frame-margin-y} + 29px);
+@mixin frame-margin-before-negative-offset {
+  margin-top: calc(#{$frame-margin-y} * -1 - 56px);
   @media #{$sm} {
-    margin-top: calc(#{$frame-margin-y-sm} + 29px);
+    margin-top: calc(#{$frame-margin-y-sm} * -1 - 56px);
   }
   @media #{$md} {
-    margin-top: calc(#{$frame-margin-y-md} + #{px-to-rem(43)});
+    margin-top: calc(#{$frame-margin-y-md} * -1 - #{px-to-rem(56)});
   }
   @media #{$lg} {
-    margin-top: calc(#{$frame-margin-y-lg} + #{px-to-rem(43)});
+    margin-top: calc(#{$frame-margin-y-lg} * -1 - #{px-to-rem(56)});
+  }
+}
+
+@mixin frame-margin-after-negative-offset {
+  margin-bottom: calc(#{$frame-margin-y} * -1 - 56px);
+  @media #{$sm} {
+    margin-bottom: calc(#{$frame-margin-y-sm} * -1 - 56px);
+  }
+  @media #{$md} {
+    margin-bottom: calc(#{$frame-margin-y-md} * -1 - #{px-to-rem(56)});
+  }
+  @media #{$lg} {
+    margin-bottom: calc(#{$frame-margin-y-lg} * -1 - #{px-to-rem(56)});
+  }
+}
+
+@mixin frame-margin-before-offset {
+  margin-top: calc(#{$frame-margin-y} + 56px);
+  @media #{$sm} {
+    margin-top: calc(#{$frame-margin-y-sm} + 56px);
+  }
+  @media #{$md} {
+    margin-top: calc(#{$frame-margin-y-md} + #{px-to-rem(56)});
+  }
+  @media #{$lg} {
+    margin-top: calc(#{$frame-margin-y-lg} + #{px-to-rem(56)});
+  }
+}
+
+@mixin frame-margin-after-offset {
+  margin-bottom: calc(#{$frame-margin-y} + 56px);
+  @media #{$sm} {
+    margin-bottom: calc(#{$frame-margin-y-sm} + 56px);
+  }
+  @media #{$md} {
+    margin-bottom: calc(#{$frame-margin-y-md} + #{px-to-rem(56)});
+  }
+  @media #{$lg} {
+    margin-bottom: calc(#{$frame-margin-y-lg} + #{px-to-rem(56)});
   }
 }
 

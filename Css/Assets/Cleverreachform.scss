@@ -1,0 +1,8 @@
+.frame-type-mask_cleverreachform {
+  fieldset {
+    @include grid(1);
+    @media #{$sm} {
+      @include grid(12, $gutter, 4, 4, 4, 12, 12, 12);
+    }
+  }
+}

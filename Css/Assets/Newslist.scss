@@ -1,0 +1,14 @@
+.frame-type-mask_newslist{
+  > div> div{
+    &.even{
+      > div:first-child{
+        order: 2;
+      }
+    }
+    .txt{
+      > a{
+        @include button;
+      }
+    }
+  }
+}
